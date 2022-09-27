@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class UserForm extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,26 +12,25 @@ class UserForm extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.save),
             onPressed: () {
-              // final isValid = _formKey.currentState.validate();
-
-              // if (isValid) {
-              _formKey.currentState?.save();
-              Navigator.of(context).pop();
-              // }
+              final isValid = _formKey.currentState?.validate() ?? false;
+              if (isValid) {
+                _formKey.currentState?.save();
+                Navigator.of(context).pop();
+              }
             },
           )
         ],
       ),
-      body: Form(
-        child: SingleChildScrollView(
-          reverse: true,
+      body: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Form(
           key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(6),
-                child: TextFormField(
+          child: SingleChildScrollView(
+            reverse: true,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                TextFormField(
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     // ignore: unnecessary_const
@@ -39,19 +39,22 @@ class UserForm extends StatelessWidget {
                     labelText: 'Nome da Instituição',
                   ),
                   validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return 'Nome inválido';
-                    }
-                    if (value.trim().length <= 3) {
-                      return 'Nome muito pequeno. No mínimo 3 letras.';
-                    }
-                    return null;
+                    return 'ocorreu um erro';
                   },
+                  onSaved: (value) {
+                    print(value);
+                  },
+                  // validator: (value) {
+                  //   if (value == null || value.trim().isEmpty) {
+                  //     return 'Nome inválido';
+                  //   }
+                  //   if (value.trim().length <= 3) {
+                  //     return 'Nome muito pequeno. No mínimo 3 letras.';
+                  //   }
+                  //   return null;
+                  // },
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(6),
-                child: TextFormField(
+                TextFormField(
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     // ignore: unnecessary_const
@@ -66,10 +69,7 @@ class UserForm extends StatelessWidget {
                     return null;
                   },
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(6),
-                child: TextFormField(
+                TextFormField(
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     icon: const Icon(Icons.calendar_today),
@@ -83,10 +83,7 @@ class UserForm extends StatelessWidget {
                     return null;
                   },
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(6),
-                child: TextFormField(
+                TextFormField(
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     icon: const Icon(Icons.calendar_today),
@@ -100,10 +97,7 @@ class UserForm extends StatelessWidget {
                     return null;
                   },
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(6),
-                child: TextFormField(
+                TextFormField(
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     icon: const Icon(Icons.flag),
@@ -117,10 +111,7 @@ class UserForm extends StatelessWidget {
                     return null;
                   },
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(6),
-                child: TextFormField(
+                TextFormField(
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     icon: const Icon(Icons.location_city),
@@ -134,10 +125,7 @@ class UserForm extends StatelessWidget {
                     return null;
                   },
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(6),
-                child: TextFormField(
+                TextFormField(
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     icon: const Icon(Icons.location_city),
@@ -151,8 +139,14 @@ class UserForm extends StatelessWidget {
                     return null;
                   },
                 ),
-              ),
-            ],
+              ]
+                  .map((e) => Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 4),
+                        child: e,
+                      ))
+                  .toList(),
+            ),
           ),
         ),
       ),
