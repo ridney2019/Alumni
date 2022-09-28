@@ -1,24 +1,59 @@
+import 'package:alumni_app/models/user.dart';
+import 'package:alumni_app/provider/users.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UserForm extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+  final Map<String, String> _formData = {};
+
+//obter
+  void _loadFormData(User user) {
+    _formData['id'] = user.id;
+    _formData['nome'] = user.id;
+    _formData['nomeCurso'] = user.id;
+    _formData['anoEntrada'] = user.id;
+    _formData['anoSaida'] = user.id;
+    _formData['pais'] = user.id;
+    _formData['cidade'] = user.id;
+    _formData['uf'] = user.id;
+    _formData['avatarUrl'] = user.id;
+  }
 
   @override
   Widget build(BuildContext context) {
+    final user = ModalRoute.of(context)?.settings.arguments ?? "null" as User;
+
+    _loadFormData(user as User);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Formulário de Egresso'),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.save),
-            onPressed: () {
-              final isValid = _formKey.currentState?.validate() ?? false;
-              if (isValid) {
-                _formKey.currentState?.save();
-                Navigator.of(context).pop();
-              }
-            },
-          )
+              icon: Icon(Icons.save),
+              onPressed: () {
+                final isValid = _formKey.currentState?.validate() ?? false;
+                if (isValid) {
+                  _formKey.currentState?.save();
+                  // provider não notificado
+                  Provider.of<Users>(context, listen: false).put(
+                    User(
+                      id: _formData['id'] ?? "null",
+                      nome: _formData['nome'] ?? "null",
+                      nomeCurso: _formData['nomeCurso'] ?? "null",
+                      anoEntrada: _formData['anoEntrada'] ?? "null",
+                      anoSaida: _formData['anoSaida'] ?? "null",
+                      pais: _formData['pais'] ?? "null",
+                      cidade: _formData['cidade'] ?? "null",
+                      uf: _formData['uf'] ?? "null",
+                      avatarUrl: _formData['avatarUrl'] ?? "null",
+                    ),
+                  );
+
+                  Navigator.of(context).pop();
+                }
+              })
         ],
       ),
       body: Padding(
@@ -31,45 +66,45 @@ class UserForm extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 TextFormField(
+                  //valor inicial associado ao textformfield aponta para formData
+                  initialValue: _formData['nome'],
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     // ignore: unnecessary_const
                     icon: const Icon(Icons.apartment),
-                    hintText: 'Selecione a instituição',
+                    hintText: 'Digite o nome da instituição',
                     labelText: 'Nome da Instituição',
                   ),
                   validator: (value) {
-                    return 'ocorreu um erro';
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Nome inválido';
+                    }
+                    if (value.trim().length <= 3) {
+                      return 'Nome muito pequeno. No mínimo 3 letras.';
+                    }
+                    return null;
                   },
-                  onSaved: (value) {
-                    print(value);
-                  },
-                  // validator: (value) {
-                  //   if (value == null || value.trim().isEmpty) {
-                  //     return 'Nome inválido';
-                  //   }
-                  //   if (value.trim().length <= 3) {
-                  //     return 'Nome muito pequeno. No mínimo 3 letras.';
-                  //   }
-                  //   return null;
-                  // },
+                  onSaved: (value) => _formData['nome'] = value!,
                 ),
                 TextFormField(
+                  initialValue: _formData['nomeCurso'],
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     // ignore: unnecessary_const
                     icon: const Icon(Icons.school),
-                    hintText: 'Entre com seu nome curso',
+                    hintText: 'Entre com o nome do curso',
                     labelText: 'Nome do Curso',
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Please enter some text';
+                      return 'Por favor digite nome do Curso';
                     }
                     return null;
                   },
+                  onSaved: (value) => _formData['nomeCurso'] = value!,
                 ),
                 TextFormField(
+                  initialValue: _formData['anoEntrada'],
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     icon: const Icon(Icons.calendar_today),
@@ -82,8 +117,10 @@ class UserForm extends StatelessWidget {
                     }
                     return null;
                   },
+                  onSaved: (value) => _formData['anoEntrada'] = value!,
                 ),
                 TextFormField(
+                  initialValue: _formData['anoSaida'],
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     icon: const Icon(Icons.calendar_today),
@@ -96,8 +133,10 @@ class UserForm extends StatelessWidget {
                     }
                     return null;
                   },
+                  onSaved: (value) => _formData['anoSaida'] = value!,
                 ),
                 TextFormField(
+                  initialValue: _formData['pais'],
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     icon: const Icon(Icons.flag),
@@ -106,12 +145,14 @@ class UserForm extends StatelessWidget {
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Por favor selecione um país';
+                      return 'Por favor digite um país';
                     }
                     return null;
                   },
+                  onSaved: (value) => _formData['pais'] = value!,
                 ),
                 TextFormField(
+                  initialValue: _formData['cidade'],
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     icon: const Icon(Icons.location_city),
@@ -120,12 +161,14 @@ class UserForm extends StatelessWidget {
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Por favor digite uma cidade';
+                      return 'Por favor digite o nome de sua cidade';
                     }
                     return null;
                   },
+                  onSaved: (value) => _formData['cidade'] = value!,
                 ),
                 TextFormField(
+                  initialValue: _formData['uf'],
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     icon: const Icon(Icons.location_city),
@@ -138,6 +181,7 @@ class UserForm extends StatelessWidget {
                     }
                     return null;
                   },
+                  onSaved: (value) => _formData['uf'] = value!,
                 ),
               ]
                   .map((e) => Padding(

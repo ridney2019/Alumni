@@ -18,19 +18,6 @@ class UserList extends StatelessWidget {
               onPressed: () {
                 //pilha de telas, adicionando em cima da home
                 Navigator.of(context).pushNamed(AppRoutes.USER_FORM);
-
-                //inserção ou alteração -teste
-                // users.put(User(
-                //   id: '1',
-                //   nome: 'aaaaa',
-                //   nomeCurso: '2022',
-                //   anoEntrada: 'user.anoEntrada',
-                //   anoSaida: 'user.anoSaida',
-                //   pais: 'user.pais',
-                //   cidade: ' user.cidade',
-                //   uf: 'user.uf',
-                //   avatarUrl: '',
-                // ));
               },
               icon: Icon(Icons.add))
         ],
