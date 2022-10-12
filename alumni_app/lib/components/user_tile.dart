@@ -1,5 +1,7 @@
+import 'package:alumni_app/provider/users.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_app/models/user.dart';
+import 'package:provider/provider.dart';
 
 import '../routes/app_routes.dart';
 
@@ -34,13 +36,34 @@ class UserTile extends StatelessWidget {
                 },
               ),
               IconButton(
-                  icon: Icon(Icons.delete),
-                  color: Colors.red,
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(
-                      AppRoutes.USER_FORM,
-                    );
-                  }),
+                icon: Icon(Icons.delete),
+                color: Colors.red,
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (ctx) => AlertDialog(
+                      title: Text('Excluir Usuário'),
+                      content: Text('Tem Certeza ?'),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text('Não'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        FlatButton(
+                          child: Text('Sim'),
+                          onPressed: () {
+                            Provider.of<Users>(context, listen: false)
+                                .remover(user);
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    ),
+                  ); //AlertDialog
+                },
+              ),
             ],
           )),
     );

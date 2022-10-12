@@ -3,35 +3,47 @@ import 'package:alumni_app/provider/users.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class UserForm extends StatelessWidget {
+class UserForm extends StatefulWidget {
+  @override
+  State<UserForm> createState() => _UserFormState();
+}
+
+class _UserFormState extends State<UserForm> {
   final _formKey = GlobalKey<FormState>();
+
   final Map<String, String> _formData = {};
 
 //obter
-  void _loadFormData(User user) {
-    _formData['id'] = user.id;
-    _formData['nome'] = user.id;
-    _formData['nomeCurso'] = user.id;
-    _formData['anoEntrada'] = user.id;
-    _formData['anoSaida'] = user.id;
-    _formData['pais'] = user.id;
-    _formData['cidade'] = user.id;
-    _formData['uf'] = user.id;
-    _formData['avatarUrl'] = user.id;
+  void _loadFormData(User? user) {
+    if (user != null) {
+      _formData['id'] = user.id;
+      _formData['nome'] = user.nome;
+      _formData['nomeCurso'] = user.nomeCurso;
+      _formData['anoEntrada'] = user.anoEntrada;
+      _formData['anoSaida'] = user.anoSaida;
+      _formData['pais'] = user.pais;
+      _formData['cidade'] = user.cidade;
+      _formData['uf'] = user.uf;
+      _formData['avatarUrl'] = user.avatarUrl;
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final user = ModalRoute.of(context)?.settings.arguments as User?;
+    _loadFormData(user);
   }
 
   @override
   Widget build(BuildContext context) {
-    final user = ModalRoute.of(context)?.settings.arguments ?? "null" as User;
-
-    _loadFormData(user as User);
-
     return Scaffold(
       appBar: AppBar(
-        title: Text('Formulário de Egresso'),
+        title: const Text('Formulário de Egresso'),
         actions: <Widget>[
           IconButton(
-              icon: Icon(Icons.save),
+              icon: const Icon(Icons.save),
               onPressed: () {
                 final isValid = _formKey.currentState?.validate() ?? false;
                 if (isValid) {
@@ -68,6 +80,7 @@ class UserForm extends StatelessWidget {
                 TextFormField(
                   //valor inicial associado ao textformfield aponta para formData
                   initialValue: _formData['nome'],
+
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     // ignore: unnecessary_const
@@ -107,7 +120,7 @@ class UserForm extends StatelessWidget {
                   initialValue: _formData['anoEntrada'],
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    icon: const Icon(Icons.calendar_today),
+                    icon: Icon(Icons.calendar_today),
                     hintText: 'Sua data de Entrada',
                     labelText: 'Ano / Semestre de Entrada',
                   ),
@@ -123,7 +136,7 @@ class UserForm extends StatelessWidget {
                   initialValue: _formData['anoSaida'],
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    icon: const Icon(Icons.calendar_today),
+                    icon: Icon(Icons.calendar_today),
                     hintText: 'Sua data de Saída',
                     labelText: 'Ano / Semestre de Saída',
                   ),
@@ -139,7 +152,7 @@ class UserForm extends StatelessWidget {
                   initialValue: _formData['pais'],
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    icon: const Icon(Icons.flag),
+                    icon: Icon(Icons.flag),
                     hintText: 'Selecione o País',
                     labelText: 'País',
                   ),
@@ -155,7 +168,7 @@ class UserForm extends StatelessWidget {
                   initialValue: _formData['cidade'],
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    icon: const Icon(Icons.location_city),
+                    icon: Icon(Icons.location_city),
                     hintText: 'Digite o nome da Cidade',
                     labelText: 'Cidade',
                   ),
@@ -171,7 +184,7 @@ class UserForm extends StatelessWidget {
                   initialValue: _formData['uf'],
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    icon: const Icon(Icons.location_city),
+                    icon: Icon(Icons.location_city),
                     hintText: 'Digite o seu Estado',
                     labelText: 'UF de residêncial Atual',
                   ),

@@ -5,8 +5,6 @@ import 'package:alumni_app/models/user.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
-import 'package:alumni_app/data/dummy_users.dart';
-import 'package:alumni_app/models/user.dart';
 
 //padrão de projeto - change notifier implementa o Observer desing p.
 class Users with ChangeNotifier {
@@ -35,9 +33,7 @@ class Users with ChangeNotifier {
       return;
     }
     //id diferente de nulo ou não vazio e está contido nos items, atualiza o usuário
-    if (user.id != null &&
-        user.id.trim().isNotEmpty &&
-        _items.containsKey(user.id)) {
+    if (user.id.trim().isNotEmpty && _items.containsKey(user.id)) {
       _items.update(user.id, (_) => user);
     } else {
       //adicionar
@@ -62,9 +58,7 @@ class Users with ChangeNotifier {
   }
 
   void remover(User user) {
-    if (user != null && user.id != null) {
-      _items.remove(user.id);
-      notifyListeners();
-    }
+    _items.remove(user.id);
+    notifyListeners();
   }
 }
