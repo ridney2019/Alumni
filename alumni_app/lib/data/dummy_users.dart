@@ -1,7 +1,7 @@
 import 'package:alumni_app/models/user.dart';
 
-const DUMMY_USERS = {
-  '1': const User(
+const dummyUsers = {
+  '1': User(
       id: '1',
       nome: 'Carlos',
       nomeCurso: 'Sistemas de Informação',
@@ -12,7 +12,7 @@ const DUMMY_USERS = {
       uf: 'TO',
       avatarUrl:
           'https://cdn.pixabay.com/photo/2016/11/01/21/11/avatar-1789663_960_720.png'),
-  '2': const User(
+  '2': User(
       id: '1',
       nome: 'Maria',
       nomeCurso: 'Redes',

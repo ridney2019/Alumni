@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 //padrão de projeto - change notifier implementa o Observer desing p.
 class Users with ChangeNotifier {
   //
-  final Map<String, User> _items = {...DUMMY_USERS};
+  final Map<String, User> _items = {...dummyUsers};
 
   //clone da lista items de MAP, sempre retorna
   //o clone se houver alteração só será incluido quando o método add for chamado
@@ -29,6 +29,7 @@ class Users with ChangeNotifier {
   //método, insere novo elemento se não existir no map, e alterar se existir com base na chave
   void put(User user) {
     //validação se o user não for nulo
+    // ignore: unnecessary_null_comparison
     if (user == null) {
       return;
     }

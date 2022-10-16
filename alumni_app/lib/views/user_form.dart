@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class UserForm extends StatefulWidget {
+  const UserForm({Key? key}) : super(key: key);
+
   @override
   State<UserForm> createState() => _UserFormState();
 }

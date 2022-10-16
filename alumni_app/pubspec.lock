@@ -93,7 +93,7 @@ packages:
     source: hosted
     version: "3.0.2"
   cupertino_icons:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: cupertino_icons
       url: "https://pub.dartlang.org"
@@ -126,7 +126,7 @@ packages:
     source: hosted
     version: "1.0.4"
   flutter_test:
-    dependency: "direct main"
+    dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -158,6 +158,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.1"
+  image_test_utils:
+    dependency: "direct dev"
+    description:
+      name: image_test_utils
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   io:
     dependency: transitive
     description:
@@ -214,8 +221,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  mockito:
+    dependency: transitive
+    description:
+      name: mockito
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.2"
   mocktail:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: mocktail
       url: "https://pub.dartlang.org"

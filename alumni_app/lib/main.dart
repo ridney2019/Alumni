@@ -30,8 +30,8 @@ class AlumniApp extends StatelessWidget {
           ),
           //Rota do componente de navegação
           routes: {
-            AppRoutes.HOME: (_) => UserList(),
-            AppRoutes.USER_FORM: (_) => UserForm(),
+            AppRoutes.home: (_) => const UserList(),
+            AppRoutes.userForm: (_) => const UserForm(),
           },
         ));
   }

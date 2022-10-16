@@ -18,7 +18,7 @@ class UserList extends StatelessWidget {
           IconButton(
               onPressed: () {
                 //pilha de telas, adicionando em cima da home
-                Navigator.of(context).pushNamed(AppRoutes.USER_FORM);
+                Navigator.of(context).pushNamed(AppRoutes.userForm);
               },
               icon: const Icon(Icons.add))
         ],
