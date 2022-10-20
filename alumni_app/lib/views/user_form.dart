@@ -20,6 +20,7 @@ class _UserFormState extends State<UserForm> {
     if (user != null) {
       _formData['id'] = user.id;
       _formData['nome'] = user.nome;
+      _formData['nomeInstituicao'] = user.nomeInstituicao;
       _formData['nomeCurso'] = user.nomeCurso;
       _formData['anoEntrada'] = user.anoEntrada;
       _formData['anoSaida'] = user.anoSaida;
@@ -55,6 +56,7 @@ class _UserFormState extends State<UserForm> {
                     User(
                       id: _formData['id'] ?? "null",
                       nome: _formData['nome'] ?? "null",
+                      nomeInstituicao: _formData['nomeInstituicao'] ?? "null",
                       nomeCurso: _formData['nomeCurso'] ?? "null",
                       anoEntrada: _formData['anoEntrada'] ?? "null",
                       anoSaida: _formData['anoSaida'] ?? "null",
@@ -86,9 +88,9 @@ class _UserFormState extends State<UserForm> {
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     // ignore: unnecessary_const
-                    icon: const Icon(Icons.apartment),
-                    hintText: 'Digite o nome da instituição',
-                    labelText: 'Nome da Instituição',
+                    icon: const Icon(Icons.person),
+                    hintText: 'Digite o nome do Egresso',
+                    labelText: 'Nome do egresso',
                   ),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
@@ -100,6 +102,28 @@ class _UserFormState extends State<UserForm> {
                     return null;
                   },
                   onSaved: (value) => _formData['nome'] = value!,
+                ),
+                TextFormField(
+                  //valor inicial associado ao textformfield aponta para formData
+                  initialValue: _formData['nomeInstituicao'],
+
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    // ignore: unnecessary_const
+                    icon: const Icon(Icons.apartment),
+                    hintText: 'Digite o nome da instituição',
+                    labelText: 'Nome da Instituição',
+                  ),
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Nome inválido';
+                    }
+                    if (value.trim().length <= 5) {
+                      return 'Nome muito pequeno. No mínimo 5 letras.';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) => _formData['nomeInstituicao'] = value!,
                 ),
                 TextFormField(
                   initialValue: _formData['nomeCurso'],

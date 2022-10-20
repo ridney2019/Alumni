@@ -21,7 +21,7 @@ class UserTile extends StatelessWidget {
     return ListTile(
       leading: avatar,
       title: Text(user.nome),
-      subtitle: Text(user.nomeCurso),
+      subtitle: Text(user.nomeInstituicao),
       trailing: SizedBox(
           width: 100,
           child: Row(

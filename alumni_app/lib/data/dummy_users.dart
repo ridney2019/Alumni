@@ -4,6 +4,7 @@ const dummyUsers = {
   '1': User(
       id: '1',
       nome: 'Carlos',
+      nomeInstituicao: 'Ceulp Ulbra',
       nomeCurso: 'Sistemas de Informação',
       anoEntrada: '2010',
       anoSaida: '2015',
@@ -15,6 +16,7 @@ const dummyUsers = {
   '2': User(
       id: '1',
       nome: 'Maria',
+      nomeInstituicao: 'UFT - Universidade Federal',
       nomeCurso: 'Redes',
       anoEntrada: '2000',
       anoSaida: '2004',

@@ -45,6 +45,7 @@ class Users with ChangeNotifier {
           () => User(
               id: id,
               nome: user.nome,
+              nomeInstituicao: user.nomeInstituicao,
               nomeCurso: user.nomeCurso,
               anoEntrada: user.anoEntrada,
               anoSaida: user.anoSaida,

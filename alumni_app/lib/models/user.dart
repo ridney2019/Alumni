@@ -1,6 +1,7 @@
 class User {
   final String id;
   final String nome;
+  final String nomeInstituicao;
   final String nomeCurso;
   final String anoEntrada;
   final String anoSaida;
@@ -12,6 +13,7 @@ class User {
   const User({
     required this.id,
     required this.nome,
+    required this.nomeInstituicao,
     required this.nomeCurso,
     required this.anoEntrada,
     required this.anoSaida,
